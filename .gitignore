@@ -1,2 +1,3 @@
 # ignore VSCode files
 *.sln
+.vscode/launch.json
