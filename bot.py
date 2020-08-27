@@ -6,6 +6,7 @@ import discord
 import random
 from discord.ext import commands
 import asyncio
+import os
 
 bot = commands.Bot(command_prefix = '>')
 
@@ -109,4 +110,4 @@ async def on_message(message):
     elif 'depress' in msg:
         await message.channel.send('1-800-273-8255')
 
-bot.run('NzQ3ODQ0ODQ0MTEzODg3NDAy.X0UyyQ.WMzYdINMD55PytZA1AM8ldS-eUs')
+bot.run(os.environ.get('KSABOT_TOKEN'))
