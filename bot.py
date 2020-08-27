@@ -23,7 +23,6 @@ async def on_member_remove(member):
 @bot.event
 async def on_raw_reaction_add(payload):
     if payload.message_id == 747968975278702592 and payload.event_type == 'REACTION_ADD':
-        print(f'{payload.emoji}')
         roles = payload.member.guild.roles
         if payload.emoji.name == '👀':
              role = discord.utils.get(roles, name = 'asian')
@@ -70,7 +69,6 @@ async def on_raw_reaction_remove(payload):
 #provide Facebook link to official UMCP KSA page
 @bot.command()
 async def facebook(ctx):
-    print('works')
     await ctx.send('https://www.facebook.com/UMCPKSA12')
 
 @bot.command()
@@ -103,11 +101,13 @@ async def on_message(message):
     msg = message.content.lower()
     if 'ksa' in msg:
         await message.add_reaction(':ksa:748290833471766610')
-    elif 'bitch' in msg:
+    if 'bitch' in msg:
         await message.channel.send('fuck you')
-    elif 'sad' in msg:
+    if 'sad' in msg:
         await message.channel.send('It really do be like that')
-    elif 'depress' in msg:
+    if 'depress' in msg:
         await message.channel.send('1-800-273-8255')
+    
+    await bot.process_commands(message)
 
 bot.run(os.environ.get('KSABOT_TOKEN'))
