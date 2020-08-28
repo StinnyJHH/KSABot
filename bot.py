@@ -1,23 +1,39 @@
-
 #Author: Austin Han, Joshua Flemming
 #Game Ideas: gambling (regular & 공기), blackjack, 윷놀이
 
 import discord
 import random
-from discord.ext import commands
+import re
 import asyncio
 import os
+from discord.ext import commands
+from googletrans import Translator
 
 bot = commands.Bot(command_prefix = '>')
+translator = Translator()
 
+#allows you to know the bot's ready for use
 @bot.event
 async def on_ready():
     print('Bot is ready')
 
+#allows you to know the bot's ready for use
 @bot.event
 async def on_member_remove(member):
     print(f'{member} has left the server')
 
+#reply and react to key words
+@bot.event
+async def on_message(message):
+    await bot.process_commands(message)
+
+    msg = message.content.lower()
+    if 'ksa' in msg:
+        await message.add_reaction(':ksa:748290833471766610')
+    if 'sad' in msg:
+        await message.channel.send('It really do be like that')
+    if 'depress' in msg:
+        await message.channel.send('1-800-273-8255')
 
 #react to self-assign roles
 @bot.event
@@ -85,29 +101,19 @@ async def coinflip(ctx):
 async def codename(ctx):
     await ctx.send('https://www.horsepaste.com/ksaislit')
 
+#Korean to English translate
 @bot.command()
-async def roles(ctx):
-    await ctx.send('Type: \n'+
-                    '"!gen"\t: General Body\n'
-                    '"!heaven"\t: Heaven Family\n'
-                    '"!earth"\t: Earth Family\n'
-                    '"!sun"\t: Sun Family\n'
-                    '"!moon"\t: Moon Family\n'
-                    '"!kdrama"\t: K-Drama binger\n'
-                    '"!kpop"\t: K-Pop stan')
+async def translate(ctx):
+    #python regular expression to eliminate the command 
+    #from the translating portion of the message
+    part = re.split('^>translate ', ctx.message.content)
+    string_to_translate = part[1]
 
-@bot.event
-async def on_message(message):
-    msg = message.content.lower()
-    if 'ksa' in msg:
-        await message.add_reaction(':ksa:748290833471766610')
-    if 'bitch' in msg:
-        await message.channel.send('fuck you')
-    if 'sad' in msg:
-        await message.channel.send('It really do be like that')
-    if 'depress' in msg:
-        await message.channel.send('1-800-273-8255')
-    
-    await bot.process_commands(message)
+    #ensure language of the given string is korean
+    if str(translator.detect(string_to_translate).lang) == 'ko':
+        result = translator.translate(string_to_translate, dest = 'en').text
+    else:
+        result = 'Please provide a word, phrase, or sentence typed in Korean'
+    await ctx.send(result)
 
 bot.run(os.environ.get('KSABOT_TOKEN'))
