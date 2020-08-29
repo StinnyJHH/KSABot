@@ -33,7 +33,7 @@ async def on_message(message):
     if 'sad' in msg:
         await message.channel.send('It really do be like that')
     if 'depress' in msg:
-        await message.channel.send('1-800-273-8255')
+        await message.channel.send('1-800-273-8255, but Vitamin D also helps')
 
 #react to self-assign roles
 @bot.event
