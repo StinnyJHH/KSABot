@@ -11,6 +11,7 @@ from googletrans import Translator
 
 bot = commands.Bot(command_prefix = '>')
 translator = Translator()
+bot.remove_command('help')
 
 #allows you to know the bot's ready for use
 @bot.event
@@ -115,5 +116,9 @@ async def translate(ctx):
     else:
         result = 'Please provide a word, phrase, or sentence typed in Korean'
     await ctx.send(result)
+
+#lay out the bot's functionality to the user
+#@bot.command()
+#async def help(ctx):
 
 bot.run(os.environ.get('KSABOT_TOKEN'))
