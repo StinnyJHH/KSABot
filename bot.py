@@ -53,6 +53,7 @@ async def on_raw_reaction_add(payload):
         elif payload.emoji.name == '💯':
              role = discord.utils.get(roles, name = 'peasant')
              await payload.member.add_roles(role)
+        #why is mine an ear
         elif payload.emoji.name == '👂':
              role = discord.utils.get(roles, name = 'jingson')
              await payload.member.add_roles(role)
