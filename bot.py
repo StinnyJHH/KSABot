@@ -1,4 +1,4 @@
-#Author: Austin Han, Joshua Flemming
+#Author: Austin Han, Joshua Fleming
 #Game Ideas: gambling (regular & 공기), blackjack, 윷놀이
 
 import discord
