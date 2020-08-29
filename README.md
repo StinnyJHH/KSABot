@@ -8,6 +8,10 @@ This bot is currently under development, and is highly subjected to change.
 The following instructions assume the bot is being run from the commandline.
 Adapt these instructions as needed for whichever IDE and/or workflow suits you best.
 
+## API Docs
+
+The documentation for the `discord` api can be accessed [here](https://discordpy.readthedocs.io/en/latest/).
+
 ## Setup
 
 ### Requirements
