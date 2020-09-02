@@ -39,55 +39,94 @@ async def on_message(message):
 #react to self-assign roles
 @bot.event
 async def on_raw_reaction_add(payload):
-    if payload.message_id == 747968975278702592 and payload.event_type == 'REACTION_ADD':
+    #for KSA
+    if payload.message_id == 750151216071442502 and payload.event_type == 'REACTION_ADD':
         roles = payload.member.guild.roles
-        if payload.emoji.name == '👀':
+
+        #KSA server roles
+        if str(payload.emoji.name) == 'sun':
+            role = discord.utils.get(roles, name = 'Sun Family')
+            await payload.member.add_roles(role) 
+        elif str(payload.emoji.name) == 'heaven':
+            role = discord.utils.get(roles, name = 'Heaven Family')
+            await payload.member.add_roles(role)
+        elif str(payload.emoji.name) == 'earth':
+            role = discord.utils.get(roles, name = 'Earth Family')
+            await payload.member.add_roles(role)
+        elif str(payload.emoji.name) == 'moon':
+            role = discord.utils.get(roles, name = 'Moon Family')
+            await payload.member.add_roles(role)
+
+    if payload.message_id == 747968975278702592 and payload.event_type == 'REACTION_ADD':   
+        #test server roles
+        if str(payload.emoji.name) == 'eyes':
              role = discord.utils.get(roles, name = 'asian')
              await payload.member.add_roles(role)
-        elif payload.emoji.name == '👅':
+        elif str(payload.emoji.name) == 'tongue':
              role = discord.utils.get(roles, name = 'chinese')
              await payload.member.add_roles(role)
-        elif payload.emoji.name == '🍆':
+        elif str(payload.emoji.name) == 'eggplant':
              role = discord.utils.get(roles, name = 'korean')
              await payload.member.add_roles(role)
-        elif payload.emoji.name == '💯':
+        elif str(payload.emoji.name) == '100':
              role = discord.utils.get(roles, name = 'peasant')
              await payload.member.add_roles(role)
         #why is mine an ear
-        elif payload.emoji.name == '👂':
+        elif str(payload.emoji.name) == 'ear':
              role = discord.utils.get(roles, name = 'jingson')
              await payload.member.add_roles(role)
 
 #remove react to self-remove roles
 @bot.event
 async def on_raw_reaction_remove(payload):
+
+    guild_id = payload.guild_id
+    user_id = payload.user_id
+    user = bot.get_user(user_id)
+    server = bot.get_guild(guild_id)
+    member = server.get_member(user_id)
+    roles = server.roles
+
+    #KSA server roles
+    if payload.message_id == 750151216071442502 and payload.event_type == 'REACTION_REMOVE':
+        if str(payload.emoji.name) == 'sun':
+            role = discord.utils.get(roles, name = 'Sun Family')
+            await member.remove_roles(role) 
+        elif str(payload.emoji.name) == 'heaven':
+            role = discord.utils.get(roles, name = 'Heaven Family')
+            await payload.member.remove_roles(role)
+        elif str(payload.emoji.name) == 'earth':
+            role = discord.utils.get(roles, name = 'Earth Family')
+            await payload.member.remove_roles(role)
+        elif str(payload.emoji.name) == 'moon':
+            role = discord.utils.get(roles, name = 'Moon Family')
+            await payload.member.remove_roles(role)
+
     if payload.message_id == 747968975278702592 and payload.event_type == 'REACTION_REMOVE':
-         guild_id = payload.guild_id
-         user_id = payload.user_id
-         user = bot.get_user(user_id)
-         server = bot.get_guild(guild_id)
-         member = server.get_member(user_id)
-         roles = server.roles
-         if payload.emoji.name == '👀':
-             role = discord.utils.get(roles, name = 'asian')
-             await member.remove_roles(role)
-         elif payload.emoji.name == '👅':
-             role = discord.utils.get(roles, name = 'chinese')
-             await member.remove_roles(role)
-         elif payload.emoji.name == '🍆':
-             role = discord.utils.get(roles, name = 'korean')
-             await member.remove_roles(role)
-         elif payload.emoji.name == '💯':
-             role = discord.utils.get(roles, name = 'peasant')
-             await member.remove_roles(role)
-         elif payload.emoji.name == '👂':
-             role = discord.utils.get(roles, name = 'jingson')
-             await member.remove_roles(role)
+        if str(payload.emoji.name) == 'eyes':
+            role = discord.utils.get(roles, name = 'asian')
+            await member.remove_roles(role)
+        elif str(payload.emoji.name) == 'tongue':
+            role = discord.utils.get(roles, name = 'chinese')
+            await member.remove_roles(role)
+        elif str(payload.emoji.name) == 'eggplant':
+            role = discord.utils.get(roles, name = 'korean')
+            await member.remove_roles(role)
+        elif str(payload.emoji.name) == '100':
+            role = discord.utils.get(roles, name = 'peasant')
+            await member.remove_roles(role)
+        elif str(payload.emoji.name) == 'ear':
+            role = discord.utils.get(roles, name = 'jingson')
+            await member.remove_roles(role)
 
 #provide Facebook link to official UMCP KSA page
 @bot.command()
 async def facebook(ctx):
     await ctx.send('https://www.facebook.com/UMCPKSA12')
+
+@bot.command()
+async def insta(ctx):
+    await ctx.send('https://www.instagram.com/umdksa/')
 
 @bot.command()
 async def coinflip(ctx):
@@ -117,6 +156,10 @@ async def translate(ctx):
     else:
         result = 'Please provide a word, phrase, or sentence typed in Korean'
     await ctx.send(result)
+
+@bot.command()
+async def ksa(ctx):
+    await ctx.send('is lit')
 
 #lay out the bot's functionality to the user
 #@bot.command()
