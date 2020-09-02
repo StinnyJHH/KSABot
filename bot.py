@@ -157,10 +157,6 @@ async def translate(ctx):
         result = 'Please provide a word, phrase, or sentence typed in Korean'
     await ctx.send(result)
 
-@bot.command()
-async def ksa(ctx):
-    await ctx.send('is lit')
-
 #lay out the bot's functionality to the user
 #@bot.command()
 #async def help(ctx):
